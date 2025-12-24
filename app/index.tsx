@@ -51,12 +51,47 @@ export default function Index() {
     }
   }
 
+  const colorByType: { [key: string]: string } = {
+    normal: "lightgray",
+    grass: "green",
+    fire: "orange",
+    water: "blue",
+    bug: "lightgreen",
+    flying: "lightblue",
+    poison: "purple",
+    electric: "yellow",
+    ground: "brown",
+    fairy: "pink",
+    fighting: "red",
+    psychic: "magenta",
+    rock: "darkgray",
+    ghost: "indigo",
+    ice: "cyan",
+    dragon: "darkblue",
+    dark: "black",
+    steel: "silver",
+  };
+
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        gap: 16,
+        padding: 16,
+      }}
+    >
       {pokemons.map((pokemon) => (
-        <View key={pokemon.name}>
+        <View
+          key={pokemon.name}
+          style={{
+            padding: 20,
+            borderRadius: 20,
+            opacity: 0.5,
+            backgroundColor:
+              colorByType[pokemon.types[0].type.name] || "lightgray",
+          }}
+        >
           <Text style={style.name}>{pokemon.name}</Text>
-          <Text>{pokemon.types[0].type.name}</Text>
+          <Text style={style.type}>{pokemon.types[0].type.name}</Text>
           <View style={{ flexDirection: "row" }}>
             <Image
               source={{ uri: pokemon.image }}
@@ -75,7 +110,14 @@ export default function Index() {
 
 const style = StyleSheet.create({
   name: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  type: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "gray",
+    textAlign: "center",
   },
 });

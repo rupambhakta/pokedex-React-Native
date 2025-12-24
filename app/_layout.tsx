@@ -1,5 +1,24 @@
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{
+          title: "Pokedex",
+          // headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="details"
+        options={{
+          title: "Pokemon Details",
+          // headerTitleAlign: "center",
+          headerBackButtonDisplayMode: "minimal",
+          // presentation: "modal",
+        }}
+      />
+    </Stack>
+  );
 }

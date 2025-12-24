@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -45,7 +46,6 @@ export default function Index() {
       );
 
       setPokemons(detailedPokemons);
-      console.log(detailedPokemons);
     } catch (error) {
       console.log(error);
     }
@@ -75,13 +75,16 @@ export default function Index() {
   return (
     <ScrollView
       contentContainerStyle={{
-        gap: 16,
+        gap: 8,
         padding: 16,
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {pokemons.map((pokemon) => (
-        <View
+        <Link
           key={pokemon.name}
+          href={{ pathname: "/details" , params: { name: pokemon.name } }}
           style={{
             padding: 20,
             borderRadius: 20,
@@ -90,19 +93,21 @@ export default function Index() {
               colorByType[pokemon.types[0].type.name] || "lightgray",
           }}
         >
-          <Text style={style.name}>{pokemon.name}</Text>
-          <Text style={style.type}>{pokemon.types[0].type.name}</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              source={{ uri: pokemon.image }}
-              style={{ width: 150, height: 150 }}
-            />
-            <Image
-              source={{ uri: pokemon.imageBack }}
-              style={{ width: 150, height: 150 }}
-            />
+          <View>
+            <Text style={style.name}>{pokemon.name}</Text>
+            <Text style={style.type}>{pokemon.types[0].type.name}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Image
+                source={{ uri: pokemon.image }}
+                style={{ width: 150, height: 150 }}
+              />
+              <Image
+                source={{ uri: pokemon.imageBack }}
+                style={{ width: 150, height: 150 }}
+              />
+            </View>
           </View>
-        </View>
+        </Link>
       ))}
     </ScrollView>
   );
